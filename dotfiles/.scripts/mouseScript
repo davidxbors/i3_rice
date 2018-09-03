@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# echo '<span foreground="#FF0000">Hello world!</span>'
+case $BLOCK_BUTTON in
+	1) echo 'Prev!';;
+	2) echo 'Toggle!';;
+	3) echo 'Next!';;
+	*) echo 'SONG!';;
+esac

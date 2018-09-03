@@ -1,0 +1,14 @@
+#!/bin/bash
+
+ft=$(echo $1 | awk -F '.' '{print $2}')
+fn=$(echo $1 | awk -F '.' '{print $1}')
+
+case $ft in
+	"cpp") g++ $1 -o $fn.o
+		./$fn.o;;
+	"tex") pdflatex $fn.$ft
+		mv *.pdf ./pdf/;;
+	"java") javac $1
+		java $fn;;
+	*) echo "Unknown filetype"
+esac

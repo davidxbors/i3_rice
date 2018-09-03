@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#pick a filename that wont overwrite
+while [[ -f $HOME/Desktop/screenshots/ss$n.png ]]
+do
+	n=$((n+1))
+done
+fn="ss$n.png"
+
+scrot $fn -e 'mv $f ~/Desktop/screenshots'

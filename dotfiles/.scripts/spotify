@@ -1,0 +1,25 @@
+#!/bin/python
+import os, re
+
+def nothing():
+    pass   
+
+def show():
+	metadata = os.system('playerctl --player=spotify metadata > spotifystat.txt')
+	with open('spotifystat.txt', 'r') as metafile:
+	    data = metafile.read().replace('\n', ' ')
+
+	m = re.search("'xesam:artist': <\[(.*)]", data)
+	artist = m.group(1)
+	m = re.search("'xesam:title': <'(.*)'>,", data)
+	song = m.group(1)
+
+	print("{} - {}".format(song, artist.strip("'")))
+
+statusOP = os.system('playerctl --player=spotify status > spotStatus.txt')
+with open("spotStatus.txt", "r") as statfile:
+    status = statfile.read().strip('\n')
+if status == "Not available":
+    nothing()
+else:
+    show()

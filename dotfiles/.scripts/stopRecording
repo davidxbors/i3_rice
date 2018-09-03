@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#echo "⏺️" > $HOME/.config/i3blocks/scripts/record && pkill -RTMIN+9 i3blocks
+bash recordToggle 
+pkill -RTMIN+2 ffmpeg

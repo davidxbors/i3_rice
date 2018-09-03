@@ -1,0 +1,8 @@
+#!/bin/python
+import os
+
+os.system("whoami > user.txt")
+with open('user.txt', 'r') as f:
+    username = f.read().strip('\n')
+
+print("Welcome, {}".format(username))

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+case $1 in
+	cpp) mkdir $2
+		cd $2 && touch ${PWD##*/}.cpp date.in date.out;;
+	tex) mkdir $2
+		cd $2 && mkdir pdf;;
+	java) mkdir $2
+		cd $2 && touch ${PWD##*/}.java;;
+	*) echo ERR
+esac

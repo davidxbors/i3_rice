@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# get the mode of the screencast
+MODE=$1
+
+# picking a filename for our video
+while [[ -f $HOME/video$n.mkv ]]
+do
+	n=$((n+1))
+done
+fn="$HOME/video$n.mkv"
+
+if [ -z $MODE ]; then
+	#bash recordToggle ⏺️
+	ffmpeg -f x11grab -s 1920x1080 -i :0.0 -f alsa -i default -c:v libx264 -qp 0 -r 30 $fn
+elif [[ $MODE == "mute" ]]; then
+	#bash recordToggle ⏺️
+	ffmpeg -f x11grab -s 1920x1080 -i :0.0 -c:v libx264 -qp -0 -r 30 $fn
+elif [[ $MODE == "with-webcam" ]]; then
+	# pick a name for the webcam vid
+	$n=0
+	while [[ -f $HOME/web$n.mkv ]]
+	do
+		n=$((n+1))
+	done
+	wn="$HOME/web$n.mkv"
+	#bash recordToggle ⏺️
+	ffmpeg -f x11grab -s 1920x1080 -i :0.0 -f alsa -i default -c:v libx264 -qp 0 -r 30 $fn
+	ffmpeg -i /dev/video0 $wn
+else
+	echo "ERR"
+	exit
+fi

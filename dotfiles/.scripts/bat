@@ -1,0 +1,22 @@
+#!/bin/bash
+
+BRUTE=$(acpi -b | grep -o -e 'Battery 0: .*' | awk -F ": " '{print $2}')
+
+STATUS=$(echo $BRUTE | grep -o -e '.*,' | awk -F "," '{print $1}')
+PROCENT=$(echo $BRUTE | grep -o -e '.*' | awk -F "," '{print $2}')
+
+#echo "$PROCENT $STATUS"
+
+if [[ "$STATUS" == "Discharging" ]]; then
+	if [ $(echo $PROCENT | tr -d '%') -gt 85 ]; then
+		echo "<span foreground='#00e600'>$PROCENT $STATUS</span>"
+	elif [ $(echo $PROCENT | tr -d '%') -gt 60 ]; then
+		echo "$PROCENT $STATUS"
+	elif [ $(echo $PROCENT | tr -d '%') -gt 30 ]; then
+		echo "<span foreground='#ffff33'>$PROCENT $STATUS</span>"
+	else
+		echo "<span foreground='#ff3333'>$PROCENT $STATUS</span>"
+	fi
+else
+	echo "<span foreground='#00e600'>$PROCENT $STATUS</span>"
+fi

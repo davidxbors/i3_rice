@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ICON=$1
+
+echo $ICON > $HOME/.config/i3blocks/scripts/record
+pkill -RTMIN+9 i3blocks

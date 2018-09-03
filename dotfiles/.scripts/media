@@ -1,0 +1,46 @@
+#!/bin/bash
+
+STATUSOP=$(playerctl --player=spotify status)
+#PAUSECOLOR="#FF0000"
+PAUSECOLOR="#E1A0B8"
+
+#echo $STATUSOP
+
+showSong(){
+	STATUS=$(playerctl --player=spotify status)
+	if [[ "${STATUS}" == "Paused" ]]; then
+		echo "<span foreground='$PAUSECOLOR'>$1 - $2</span>"
+	else
+		#if [ -z $1 ]; then
+		#	one=$(playerctl --player=spotify metadata | grep -o -e "'xesam:title': <".*">," | awk -F '"' '{print $2}')
+		#elif [ -z $2 ]; then
+		#	two=$(playerctl --player=spotify metadata | grep -o -e "'xesam:artist': <\[.*]" | awk -F '"' '{print $2}')
+		#fi
+		#if [ -z $1 ]; then
+		#	echo "$one - $2"
+		#fi
+		#if [ -z $2 ]; then
+		#	echo "$1 - $two"
+		#fi
+		#if [ -n $1 ] && [ -n $2]; then
+			echo "$1 - $2"
+		#fi
+	fi
+}
+
+if [[ "${STATUSOP}" == "Not available"  ]]; then
+	echo ""
+else
+	DISPLAY_ARTIST=$(playerctl --player=spotify metadata | grep -o -e "'xesam:artist': <\[.*]" | awk -F "'" '{print $4}')
+	DISPLAY_SONG=$(playerctl --player=spotify metadata | grep -o -e "'xesam:title': <'.*'>," | awk -F "'" '{print $4}')
+	# echo $DISPLAY_SONG - $DISPLAY_ARTIST
+	case $BLOCK_BUTTON in
+		1) playerctl --player=spotify previous
+		   showSong "$DISPLAY_SONG" "$DISPLAY_ARTIST";;
+		2) playerctl --player=spotify play-pause
+		   showSong "$DISPLAY_SONG" "$DISPLAY_ARTIST";;
+		3) playerctl --player=spotify next
+		   showSong "$DISPLAY_SONG" "$DISPLAY_ARTIST";;
+		*) showSong "$DISPLAY_SONG" "$DISPLAY_ARTIST"
+	esac
+fi
