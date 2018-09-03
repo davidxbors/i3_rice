@@ -19,7 +19,7 @@ In order for all the scripts & keybindings to work fine, you should have install
 
 ## .vimrc big update soon!
 
-My .vimrc has not any functionalities, more to be added in 1-2 days!
+My .vimrc has not many functionalities, more to be added in 1-2 days!
 
 ## Functionalities
 
