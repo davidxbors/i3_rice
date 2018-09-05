@@ -22,5 +22,20 @@ autocmd FileType tex,cpp map <F9> :put =expand('%:t')<CR>V"*yVd<Esc>:w !compile 
 
 " LATEX snippets
 autocmd FileType tex map <F3> :w !detex \| wc -w<CR>
-autocmd FileType tex imap ,s \subsection{<++>}
-autocmd FileType tex imap ,s* \subsection*{<++>}
+autocmd FileType tex imap ,s \subsection{<++>}<Esc><Space><Tab>
+autocmd FileType tex imap ,s* \subsection*{<++>}<Esc><Space><Tab> 
+autocmd FileType tex imap ,dcls \documentclass[12pt]{<++>}<Esc><Space><Tab> 
+autocmd FileType tex imap ,ttl \title{<++>}<Esc><Space><Tab>
+autocmd FileType tex imap ,dt \date{<++>}<Esc><Space><Tab> 
+autocmd FileType tex imap ,body \begin{document}<CR>\maketitle<CR>\large<CR><++><CR>\end{document}<Esc><Space><Tab>
+autocmd FileType tex imap ,bf \textbf{<++>}<Esc><Space><Tab>
+autocmd FileType tex imap ,em \emph{<++>}<Esc><Space><Tab> 
+autocmd FileType tex imap ,it \textit{<++>}<Esc><Space><Tab> 
+autocmd FileType tex imap ,ct \textcite{<++>}<Esc><Space><Tab> 
+autocmd FileType tex imap ,cp \parencite{<++>}<Esc><Space><Tab> 
+autocmd FileType tex imap ,ol \begin{enumerate}<Enter><++><Enter>\end{enumerate}<Esc><Space><Tab>
+autocmd FileType tex imap ,ul \begin{itemize}<CR><++><CR>\end{itemize}<Esc><Space><Tab>  
+autocmd FileType tex imap ,li \item <++><Esc><Space><Tab> 
+
+" cpp snippets
+autocmd FileType cpp imap ,def #include<iostream><CR>int main(){<CR><Tab>std::cout << "Hello world!\n";<CR><Tab>return 0;<CR>}
